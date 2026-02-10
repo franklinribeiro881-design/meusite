@@ -1,17 +1,77 @@
 
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Site</title>
+    <title>Franklin - Formatação e Manutenção</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; padding: 50px; }
-        h1 { color: #333; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; color: #333; background-color: #f4f7f6; }
+        header { background: #001f3f; color: #ffffff; padding: 2rem; text-align: center; border-bottom: 4px solid #0074D9; }
+        .container { width: 90%; max-width: 800px; margin: auto; overflow: hidden; padding: 20px; }
+        h2 { text-align: center; color: #001f3f; }
+        
+        /* Tabela de Preços */
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #0074D9; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+
+        /* Botão WhatsApp */
+        .btn-whatsapp { display: block; width: fit-content; margin: 30px auto; background-color: #25d366; color: white; padding: 15px 25px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.2rem; transition: transform 0.3s; }
+        .btn-whatsapp:hover { transform: scale(1.1); background-color: #128c7e; }
+        footer { text-align: center; padding: 20px; font-size: 0.8rem; color: #777; }
     </style>
 </head>
 <body>
-    <h1>Meu site está online!</h1>
-    <p>Este é o meu primeiro projeto no GitHub Pages.</p>
+
+<header>
+    <h1>Franklin Tech</h1>
+    <p>Especialista em Formatação e Limpeza de Notebooks e PCs em Goiânia</p>
+</header>
+
+<div class="container">
+    <h2>Tabela de Serviços (Preços Médios Goiânia)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Serviço</th>
+                <th>Preço Estimado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Formatação Simples (Windows + Drivers)</td>
+                <td>R$ 80,00</td>
+            </tr>
+            <tr>
+                <td>Formatação Completa + Backup</td>
+                <td>R$ 120,00</td>
+            </tr>
+            <tr>
+                <td>Limpeza Preventiva + Troca de Pasta Térmica</td>
+                <td>R$ 100,00</td>
+            </tr>
+            <tr>
+                <td>Combo: Formatação + Limpeza</td>
+                <td>R$ 180,00</td>
+            </tr>
+            <tr>
+                <td>Instalação de SSD (Mão de obra)</td>
+                <td>R$ 60,00</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="https://wa.me/5562999999999?text=Olá%20Franklin,%20gostaria%20de%20um%20orçamento!" class="btn-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> Falar com o Técnico Franklin
+    </a>
+</div>
+
+<footer>
+    <p>&copy; 2026 Franklin Tech - Goiânia, GO</p>
+</footer>
+
 </body>
 </html>
