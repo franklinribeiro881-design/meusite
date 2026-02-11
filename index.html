@@ -1,76 +1,45 @@
 
- <!DOCTYPE html>
+    
+   <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Franklin - Formatação e Manutenção</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Portal BBB - Franklin</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; color: #333; background-color: #f4f7f6; }
-        header { background: #001f3f; color: #ffffff; padding: 2rem; text-align: center; border-bottom: 4px solid #0074D9; }
-        .container { width: 90%; max-width: 800px; margin: auto; overflow: hidden; padding: 20px; }
-        h2 { text-align: center; color: #001f3f; }
+        /* Cores oficiais do BBB */
+        body { font-family: 'Arial', sans-serif; margin: 0; background-color: #f0f0f0; color: #333; }
+        header { background: linear-gradient(90deg, #0047ba, #00acee); color: white; padding: 20px; text-align: center; border-bottom: 5px solid #ffcc00; }
+        .criador { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 5px; color: #ffcc00; }
         
-        /* Tabela de Preços */
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background-color: #0074D9; color: white; }
-        tr:hover { background-color: #f1f1f1; }
-
-        /* Botão WhatsApp */
-        .btn-whatsapp { display: block; width: fit-content; margin: 30px auto; background-color: #25d366; color: white; padding: 15px 25px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.2rem; transition: transform 0.3s; }
-        .btn-whatsapp:hover { transform: scale(1.1); background-color: #128c7e; }
-        footer { text-align: center; padding: 20px; font-size: 0.8rem; color: #777; }
+        .container { padding: 20px; max-width: 900px; margin: auto; }
+        h2 { color: #0047ba; text-align: center; border-bottom: 2px solid #00acee; padding-bottom: 10px; }
+        
+        /* Estilo do Widget de Notícias */
+        .noticias-box { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); min-height: 500px; }
+        
+        footer { background: #333; color: white; text-align: center; padding: 15px; margin-top: 30px; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Franklin Tech</h1>
-    <p>Especialista em Formatação e Limpeza de Notebooks e PCs em Goiânia</p>
+    <span class="criador">Franklin - Criador do Portal BBB</span>
+    <h1>PORTAL BBB 26</h1>
+    <p>As últimas notícias da casa mais vigiada do Brasil!</p>
 </header>
 
 <div class="container">
-    <h2>Tabela de Serviços (Preços Médios Goiânia)</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Serviço</th>
-                <th>Preço Estimado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Formatação Simples (Windows + Drivers)</td>
-                <td>R$ 80,00</td>
-            </tr>
-            <tr>
-                <td>Formatação Completa + Backup</td>
-                <td>R$ 120,00</td>
-            </tr>
-            <tr>
-                <td>Limpeza Preventiva + Troca de Pasta Térmica</td>
-                <td>R$ 100,00</td>
-            </tr>
-            <tr>
-                <td>Combo: Formatação + Limpeza</td>
-                <td>R$ 180,00</td>
-            </tr>
-            <tr>
-                <td>Instalação de SSD (Mão de obra)</td>
-                <td>R$ 60,00</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="https://wa.me/5562999999999?text=Olá%20Franklin,%20gostaria%20de%20um%20orçamento!" class="btn-whatsapp" target="_blank">
-        <i class="fab fa-whatsapp"></i> Falar com o Técnico Franklin
-    </a>
+    <h2>Notícias em Tempo Real</h2>
+    <div class="noticias-box">
+        <script src="https://rss.app/static/widgets/imageboard.js"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxx" data-ad-slot="xxx" data-ad-format="auto"></ins>
+        <rssapp-imageboard id="tYp1vXyN6ZqW8a2M"></rssapp-imageboard>
+        </div>
 </div>
 
 <footer>
-    <p>&copy; 2026 Franklin Tech - Goiânia, GO</p>
+    <p>&copy; 2026 Portal BBB - Franklin Ribeiro - Todos os direitos reservados</p>
 </footer>
 
 </body>
