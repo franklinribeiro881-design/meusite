@@ -38,7 +38,6 @@ window.postarMensagem = async function() {
     }
 }
 
-// FUNÇÃO PARA DELETAR MENSAGEM
 window.deletarPost = async function(id) {
     if (confirm("Deseja mesmo apagar essa mensagem?")) {
         await deleteDoc(doc(db, "posts", id));
@@ -69,9 +68,8 @@ function carregarFeed() {
             const id = docSnap.id;
             const dataFormatada = post.data ? new Date(post.data.seconds * 1000).toLocaleString('pt-BR') : "Agora";
             
-            // Só mostra o botão de excluir se o usuário logado for o autor
-            const botaoExcluir = auth.currentUser.email === post.autor 
-                ? `<button onclick="deletarPost('${id}')" style="background:none; color:red; width:auto; padding:5px; font-size:12px; margin-top:5px; border:1px solid red;">🗑️ Apagar</button>` 
+            const botaoExcluir = auth.currentUser && auth.currentUser.email === post.autor 
+                ? `<button onclick="deletarPost('${id}')" style="background:none; color:red; width:auto; padding:5px; font-size:12px; margin-top:5px; border:1px solid red; border-radius:5px; cursor:pointer;">🗑️ Apagar</button>` 
                 : "";
 
             lista.innerHTML += `
