@@ -1,94 +1,186 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Franklin Tech Solutions</title>
+    <title>Franklin TI - Montagem e Manutenção</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #000; color: #fff; line-height: 1.6; }
-        header { background-color: #1a1a1a; padding: 40px 20px; text-align: center; border-bottom: 2px solid #333; }
-        h1 { margin: 0; font-size: 2.5rem; letter-spacing: 2px; }
-        .container { padding: 20px; max-width: 1000px; margin: auto; }
-        .section-title { text-align: center; color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 40px; }
-        
-        /* Tabela de Serviços */
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #111; }
-        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
-        th { background-color: #222; color: #fff; }
+        :root {
+            --azul: #004AAD;
+            --vermelho: #FF3131;
+            --branco: #FFFFFF;
+        }
 
-        /* Grid de Peças */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-        .card { background: #1a1a1a; padding: 20px; border: 1px solid #333; border-radius: 8px; text-align: center; }
-        .price { color: #00ff00; font-size: 1.2rem; font-weight: bold; }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Topo com Nome e Relógio */
+        header {
+            background-color: var(--azul);
+            color: var(--branco);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--vermelho);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .relogio-container {
+            margin-top: 10px;
+            font-weight: bold;
+            background: var(--vermelho);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Seção Banner */
+        .banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        /* Tabela de Preços */
+        .conteudo {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h2 { color: var(--azul); text-align: center; }
+
+        .tabela-precos {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .tabela-precos th {
+            background: var(--azul);
+            color: white;
+            padding: 15px;
+        }
+
+        .tabela-precos td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .preco-tag {
+            color: var(--vermelho);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
 
         /* Botão WhatsApp */
-        .btn-zap { display: block; width: fit-content; margin: 40px auto; background-color: #fff; color: #000; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.1rem; transition: 0.3s; }
-        .btn-zap:hover { background-color: #ccc; }
-        
-        footer { text-align: center; padding: 30px; color: #666; font-size: 0.8rem; }
+        .btn-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-whatsapp:hover { transform: scale(1.1); }
+
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>FRANKLIN TECH SOLUTIONS</h1>
-    <p>Assistência Técnica Especializada & Peças de Alta Performance</p>
-</header>
+    <header>
+        <h1 style="margin:0; font-size: 2.5em;">FRANKLIN TI</h1>
+        <div class="relogio-container">
+            <i class="far fa-clock"></i> <span id="relogio">00:00:00</span>
+        </div>
+    </header>
 
-<div class="container">
-    <h2 class="section-title">SERVIÇOS DE INFORMÁTICA</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Serviço</th>
-                <th>Valor Médio</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Formatação Premium (Windows 11 + Office + Drivers)</td>
-                <td>R$ 100,00</td>
-            </tr>
-            <tr>
-                <td>Limpeza Química Completa + Pasta Térmica</td>
-                <td>R$ 120,00</td>
-            </tr>
-            <tr>
-                <td>Montagem de PC Gamer (Gestão de Cabos)</td>
-                <td>R$ 150,00</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h2 class="section-title">PEÇAS E COMPONENTES</h2>
-    <div class="grid">
-        <div class="card">
-            <h3>Processador Intel i5</h3>
-            <p>12ª Geração - Alta Performance</p>
-            <p class="price">Consulte o dia</p>
-        </div>
-        <div class="card">
-            <h3>Placa-mãe H610M</h3>
-            <p>Suporte para DDR4/DDR5</p>
-            <p class="price">Consulte o dia</p>
-        </div>
-        <div class="card">
-            <h3>Gabinete Gamer Vidro</h3>
-            <p>Com 3 Fans RGB inclusas</p>
-            <p class="price">R$ 280,00</p>
-        </div>
+    <div class="banner">
+        <h1>Manutenção Profissional em Goiânia</h1>
+        <p>Computadores e Notebooks - Formatação, Limpeza e Backup</p>
     </div>
 
-    <a href="https://wa.me/5562981225308?text=Olá%20Franklin,%20vi%20seu%20site%20e%20quero%20um%20orçamento!" class="btn-zap">
-        <i class="fab fa-whatsapp"></i> ENTRAR EM CONTATO AGORA
-    </a>
-</div>
+    <div class="conteudo">
+        <h2>Tabela de Serviços</h2>
+        <table class="tabela-precos">
+            <thead>
+                <tr>
+                    <th>Serviço</th>
+                    <th>Valor em Goiânia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Limpeza Completa + Pasta Térmica</td>
+                    <td class="preco-tag">R$ 120,00</td>
+                </tr>
+                <tr>
+                    <td>Formatação + Instalação de Drivers</td>
+                    <td class="preco-tag">R$ 150,00</td>
+                </tr>
+                <tr>
+                    <td>Backup de Segurança (Até 500GB)</td>
+                    <td class="preco-tag">R$ 100,00</td>
+                </tr>
+                <tr>
+                    <td>Montagem de PC (Hardware Novo)</td>
+                    <td class="preco-tag">A partir de R$ 180,00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-<footer>
-    <p>&copy; 2026 Franklin Tech Solutions - Goiânia/GO</p>
-    <p>Atendimento Profissional com Garantia</p>
-</footer>
+    <a href="https://wa.me/5562981225308?text=Olá%20Franklin,%20vi%20seu%20site%20e%20preciso%20de%20um%20serviço%20de%20TI!" class="btn-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp" style="font-size: 1.5em;"></i>
+        Falar com Franklin agora
+    </a>
+
+    <footer>
+        <p>Franklin TI &copy; 2026 - Atendendo toda Goiânia e Região</p>
+    </footer>
+
+    <script>
+        function atualizarRelogio() {
+            const agora = new Date();
+            const horas = String(agora.getHours()).padStart(2, '0');
+            const minutos = String(agora.getMinutes()).padStart(2, '0');
+            const segundos = String(agora.getSeconds()).padStart(2, '0');
+            document.getElementById('relogio').textContent = horas + ":" + minutos + ":" + segundos + " (Brasília)";
+        }
+        setInterval(atualizarRelogio, 1000);
+        atualizarRelogio();
+    </script>
 
 </body>
 </html>
