@@ -1,0 +1,42 @@
+body { 
+    font-family: Arial, sans-serif; 
+    background-color: #f0f2f5; 
+    display: flex; 
+    justify-content: center; 
+    padding-top: 50px; 
+}
+
+#app { 
+    background: white; 
+    padding: 30px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+    width: 90%; 
+    max-width: 350px; 
+    text-align: center; 
+}
+
+input { 
+    width: 100%; 
+    padding: 12px; 
+    margin: 8px 0; 
+    border: 1px solid #ddd; 
+    border-radius: 6px; 
+    box-sizing: border-box; 
+}
+
+button { 
+    width: 100%; 
+    padding: 12px; 
+    background-color: #1877f2; 
+    color: white; 
+    border: none; 
+    border-radius: 6px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    margin-top: 10px;
+}
+
+button:hover { 
+    background-color: #166fe5; 
+}
