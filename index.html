@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Franklin TI - Especialista em Manutenção</title>
+    <title>Franklin TI - Manutenção de Elite em Goiânia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -38,6 +38,15 @@
             border: 2px solid var(--vermelho);
         }
 
+        /* PLAYER DE RÁDIO */
+        .radio-container {
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
         /* BANNER */
         .hero {
             background: linear-gradient(45deg, rgba(0,74,173,0.9), rgba(255,49,49,0.3)), 
@@ -45,17 +54,17 @@
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 80px 20px;
+            padding: 60px 20px;
             text-align: center;
         }
 
-        /* CARDS DE DIFERENCIAIS */
+        /* DIFERENCIAIS */
         .diferenciais {
             display: flex;
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
-            margin-top: -40px;
+            margin-top: -30px;
             padding: 0 20px;
         }
 
@@ -63,25 +72,21 @@
             background: white;
             padding: 20px;
             border-radius: 10px;
-            width: 250px;
+            width: 200px;
             text-align: center;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: 0.3s;
             border-bottom: 4px solid var(--azul);
         }
 
-        .card:hover { transform: translateY(-10px); border-bottom-color: var(--vermelho); }
-        .card i { font-size: 2.5em; color: var(--azul); margin-bottom: 10px; }
-
         /* TABELA */
-        .secao { max-width: 900px; margin: 50px auto; padding: 20px; background: white; border-radius: 15px; }
+        .secao { max-width: 900px; margin: 40px auto; padding: 20px; background: white; border-radius: 15px; }
         
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { background: var(--azul); color: white; padding: 15px; text-transform: uppercase; }
-        td { padding: 15px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background: var(--azul); color: white; padding: 15px; }
+        td { padding: 15px; border-bottom: 1px solid #ddd; }
         .preco { color: var(--vermelho); font-weight: bold; font-size: 1.2em; text-align: right; }
 
-        /* BOTÃO WHATSAPP */
+        /* WHATSAPP */
         .float-wa {
             position: fixed; bottom: 25px; right: 25px;
             background: #25d366; color: white;
@@ -92,93 +97,83 @@
             z-index: 9999; animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-        footer { background: var(--preto); color: white; text-align: center; padding: 40px 20px; margin-top: 50px; }
+        footer { background: var(--preto); color: white; text-align: center; padding: 30px; margin-top: 50px; }
     </style>
 </head>
 <body>
 
     <header>
         <h1 style="margin:0; letter-spacing: 2px;">FRANKLIN TI</h1>
+        
         <div class="relogio-box" id="clock">00:00:00</div>
+
+        <br>
+        
+        <div class="radio-container">
+            <p style="margin: 0 0 5px 0; font-size: 0.8em; font-weight: bold;">Ouça a 99,5 FM ao vivo:</p>
+            <audio id="playerRadio" controls style="height: 30px; width: 220px;">
+                <source src="https://shaincast.com.br:7122/stream" type="audio/mpeg">
+                Seu navegador não suporta rádio.
+            </audio>
+        </div>
     </header>
 
     <section class="hero">
-        <h2 style="font-size: 2.5em; margin-bottom: 10px;">Manutenção Express em Goiânia</h2>
-        <p style="font-size: 1.2em;">Seu computador novo de novo. Atendimento rápido e garantido!</p>
+        <h2 style="font-size: 2em; margin-bottom: 10px;">Manutenção Profissional em Goiânia</h2>
+        <p>Seu PC ou Notebook em boas mãos!</p>
     </section>
 
     <div class="diferenciais">
-        <div class="card">
-            <i class="fas fa-shield-alt"></i>
-            <h3>Garantia</h3>
-            <p>Serviço garantido ou seu dinheiro de volta.</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-bolt"></i>
-            <h3>Agilidade</h3>
-            <p>Entrega na maioria dos casos no mesmo dia.</p>
-        </div>
-        <div class="card">
-            <i class="fas fa-map-marker-alt"></i>
-            <h3>Goiânia</h3>
-            <p>Atendimento em todos os setores da capital.</p>
-        </div>
+        <div class="card"><i class="fas fa-shield-alt" style="color:var(--azul); font-size: 2em;"></i><h4>Garantia</h4></div>
+        <div class="card"><i class="fas fa-bolt" style="color:var(--azul); font-size: 2em;"></i><h4>Agilidade</h4></div>
+        <div class="card"><i class="fas fa-map-marker-alt" style="color:var(--azul); font-size: 2em;"></i><h4>Goiânia/GO</h4></div>
     </div>
 
     <section class="secao">
-        <h2 style="text-align:center; color: var(--azul);">Serviços e Preços</h2>
+        <h2 style="text-align:center; color: var(--azul);">Tabela de Serviços</h2>
         <table>
             <thead>
                 <tr>
                     <th>Serviço Profissional</th>
-                    <th>Investimento</th>
+                    <th>Preço</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>Limpeza Preventiva</strong><br><small>Desmontagem total + Pasta Térmica Silver</small></td>
+                    <td><strong>Limpeza Preventiva</strong><br><small>Troca de pasta térmica e limpeza interna</small></td>
                     <td class="preco">R$ 120,00</td>
                 </tr>
                 <tr>
-                    <td><strong>Formatação Master</strong><br><small>Win 10/11 Pro + Office + Antivírus</small></td>
+                    <td><strong>Formatação Pro</strong><br><small>Drivers + Windows + Office</small></td>
                     <td class="preco">R$ 150,00</td>
                 </tr>
                 <tr>
-                    <td><strong>Instalação de Drivers e Otimização</strong><br><small>Melhora o desempenho em jogos e trabalho</small></td>
-                    <td class="preco">R$ 80,00</td>
-                </tr>
-                <tr>
-                    <td><strong>Backup de Segurança</strong><br><small>Proteção total dos seus documentos e fotos</small></td>
+                    <td><strong>Backup de Dados</strong><br><small>Até 500GB de arquivos</small></td>
                     <td class="preco">R$ 100,00</td>
                 </tr>
                 <tr>
-                    <td><strong>Montagem de PC Gamer/Office</strong><br><small>Montagem com organização de cabos</small></td>
+                    <td><strong>Montagem de PC Gamer</strong><br><small>Organização de cabos e hardware</small></td>
                     <td class="preco">R$ 180,00</td>
                 </tr>
             </tbody>
         </table>
     </section>
 
-    <div style="text-align: center; margin-bottom: 50px;">
-        <h3 style="color: var(--azul);">Precisa de algo específico?</h3>
-        <p>Faça um orçamento gratuito agora mesmo!</p>
-    </div>
+    <section class="secao">
+        <h3 style="text-align:center; color: var(--azul);">Meus Trabalhos</h3>
+        <p style="text-align:center; font-size: 0.9em;">(Em breve: fotos dos serviços realizados)</p>
+    </section>
 
-    <a href="https://wa.me/5562981225308?text=Olá%20Franklin,%20vi%20seu%20site%20e%20gostaria%20de%20um%20orçamento!" class="float-wa" target="_blank">
+    <a href="https://wa.me/5562981225308?text=Olá%20Franklin,%20vi%20seu%20site%20e%20quero%20um%20orçamento!" class="float-wa" target="_blank">
         <i class="fab fa-whatsapp" style="font-size: 1.8em;"></i>
-        SOLICITAR ORÇAMENTO
+        CHAMAR NO WHATSAPP
     </a>
 
     <footer>
-        <p><strong>FRANKLIN TI - Montagem e Manutenção</strong></p>
-        <p>Goiânia - GO | Contato: (62) 98122-5308</p>
-        <p style="font-size: 0.8em; opacity: 0.6;">&copy; 2026 Franklin TI. Todos os direitos reservados.</p>
+        <p><strong>FRANKLIN TI - (62) 98122-5308</strong></p>
+        <p>Atendendo Goiânia e Região com Qualidade</p>
     </footer>
 
     <script>
