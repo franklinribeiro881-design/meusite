@@ -1,89 +1,74 @@
-/* Estilo Moderno - Rede Social do Franklin */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    color: #333;
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBX6q4bTflyR0kva3IYgih2G3QEZWx3Smw",
+  authDomain: "red-social-be117.firebaseapp.com",
+  projectId: "red-social-be117",
+  storageBucket: "red-social-be117.firebasestorage.app",
+  messagingSenderId: "746982738864",
+  appId: "1:746982738864:web:645bf1910e04fcf9506475",
+  measurementId: "G-28N3LXTQ1S"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+window.fazerLogin = function() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    if (!email || !password) { alert("Preencha e-mail e senha!"); return; }
+    signInWithEmailAndPassword(auth, email, password)
+      .catch(() => createUserWithEmailAndPassword(auth, email, password))
+      .catch((err) => alert("Erro: " + err.message));
 }
 
-#app {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-    width: 90%;
-    max-width: 450px;
-    text-align: center;
+window.postarMensagem = async function() {
+    const texto = document.getElementById('post-text').value;
+    const user = auth.currentUser;
+    if (texto && user) {
+        await addDoc(collection(db, "posts"), {
+            texto: texto,
+            autor: user.email,
+            data: new Date()
+        });
+        document.getElementById('post-text').value = "";
+    } else {
+        alert("Escreva algo antes de postar!");
+    }
 }
 
-h1 {
-    color: #4a4a4a;
-    font-size: 24px;
-    margin-bottom: 25px;
+onAuthStateChanged(auth, (user) => {
+    const loginArea = document.getElementById('login-area');
+    const userArea = document.getElementById('user-area');
+    if (user) {
+        loginArea.style.display = 'none';
+        userArea.style.display = 'block';
+        document.getElementById('user-email').innerText = user.email;
+        carregarFeed();
+    } else {
+        loginArea.style.display = 'block';
+        userArea.style.display = 'none';
+    }
+});
+
+function carregarFeed() {
+    const q = query(collection(db, "posts"), orderBy("data", "desc"));
+    onSnapshot(q, (snapshot) => {
+        const lista = document.getElementById('mensagens-lista');
+        lista.innerHTML = "";
+        snapshot.forEach((doc) => {
+            const post = doc.data();
+            lista.innerHTML += `
+                <div class="post-item">
+                    <strong>${post.autor}</strong>
+                    <p>${post.texto}</p>
+                </div>
+            `;
+        });
+    });
 }
 
-input, textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 2px solid #eee;
-    border-radius: 12px;
-    box-sizing: border-box;
-    outline: none;
-    transition: 0.3s;
-}
-
-input:focus, textarea:focus {
-    border-color: #667eea;
-}
-
-button {
-    width: 100%;
-    padding: 14px;
-    background: #1877f2;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
-    margin-top: 10px;
-}
-
-button:hover {
-    background: #145dbf;
-    transform: translateY(-2px);
-}
-
-/* Estilo dos Balões de Mensagem */
-#mensagens-lista div {
-    background: #f0f2f5;
-    padding: 15px;
-    border-radius: 18px;
-    margin-bottom: 15px;
-    border-left: 6px solid #667eea;
-    text-align: left;
-    animation: fadeIn 0.5s ease;
-}
-
-#mensagens-lista strong {
-    color: #764ba2;
-    font-size: 13px;
-    display: block;
-    margin-bottom: 5px;
-}
-
-#mensagens-lista p {
-    margin: 0;
-    line-height: 1.5;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+window.fazerLogout = () => signOut(auth);
