@@ -61,10 +61,13 @@ function carregarFeed() {
         lista.innerHTML = "";
         snapshot.forEach((doc) => {
             const post = doc.data();
+            const dataFormatada = post.data ? new Date(post.data.seconds * 1000).toLocaleString('pt-BR') : "Agora pouco";
+            
             lista.innerHTML += `
                 <div class="post-item">
                     <strong>${post.autor}</strong>
                     <p>${post.texto}</p>
+                    <small style="color: #888; font-size: 10px; display: block; margin-top: 8px;">Postado em: ${dataFormatada}</small>
                 </div>
             `;
         });
