@@ -20,7 +20,6 @@ window.fazerLogin = function() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     if (!email || !password) { alert("Preencha e-mail e senha!"); return; }
-
     signInWithEmailAndPassword(auth, email, password)
       .catch(() => createUserWithEmailAndPassword(auth, email, password))
       .catch((err) => alert("Erro: " + err.message));
@@ -63,9 +62,9 @@ function carregarFeed() {
         snapshot.forEach((doc) => {
             const post = doc.data();
             lista.innerHTML += `
-                <div style="background: #f9f9f9; padding: 10px; border-radius: 8px; margin-bottom: 10px; border-left: 5px solid #1877f2;">
-                    <strong>${post.autor}</strong>
-                    <p>${post.texto}</p>
+                <div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 6px solid #1877f2; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <strong style="color: #1877f2; display: block; margin-bottom: 5px;">${post.autor}</strong>
+                    <p style="margin: 0; color: #333; font-size: 16px;">${post.texto}</p>
                 </div>
             `;
         });
