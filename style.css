@@ -1,42 +1,39 @@
-body { 
-    font-family: Arial, sans-serif; 
-    background-color: #f0f2f5; 
-    display: flex; 
-    justify-content: center; 
-    padding-top: 50px; 
+body {
+    font-family: sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-#app { 
-    background: white; 
-    padding: 30px; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-    width: 90%; 
-    max-width: 350px; 
-    text-align: center; 
+#app {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
 }
 
-input { 
-    width: 100%; 
-    padding: 12px; 
-    margin: 8px 0; 
-    border: 1px solid #ddd; 
-    border-radius: 6px; 
-    box-sizing: border-box; 
+button {
+    background: #1877f2;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
 }
 
-button { 
-    width: 100%; 
-    padding: 12px; 
-    background-color: #1877f2; 
-    color: white; 
-    border: none; 
-    border-radius: 6px; 
-    font-weight: bold; 
-    cursor: pointer; 
+.post-item {
+    background: #f0f2f5;
+    padding: 12px;
+    border-radius: 12px;
     margin-top: 10px;
-}
-
-button:hover { 
-    background-color: #166fe5; 
+    text-align: left;
+    border-left: 5px solid #667eea;
 }
