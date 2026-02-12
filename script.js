@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBX6q4bTflyR0kva3IYgih2G3QEZWx3Smw",
@@ -35,8 +35,13 @@ window.postarMensagem = async function() {
             data: new Date()
         });
         document.getElementById('post-text').value = "";
-    } else {
-        alert("Escreva algo antes de postar!");
+    }
+}
+
+// FUNÇÃO PARA DELETAR MENSAGEM
+window.deletarPost = async function(id) {
+    if (confirm("Deseja mesmo apagar essa mensagem?")) {
+        await deleteDoc(doc(db, "posts", id));
     }
 }
 
@@ -59,15 +64,22 @@ function carregarFeed() {
     onSnapshot(q, (snapshot) => {
         const lista = document.getElementById('mensagens-lista');
         lista.innerHTML = "";
-        snapshot.forEach((doc) => {
-            const post = doc.data();
-            const dataFormatada = post.data ? new Date(post.data.seconds * 1000).toLocaleString('pt-BR') : "Agora pouco";
+        snapshot.forEach((docSnap) => {
+            const post = docSnap.data();
+            const id = docSnap.id;
+            const dataFormatada = post.data ? new Date(post.data.seconds * 1000).toLocaleString('pt-BR') : "Agora";
             
+            // Só mostra o botão de excluir se o usuário logado for o autor
+            const botaoExcluir = auth.currentUser.email === post.autor 
+                ? `<button onclick="deletarPost('${id}')" style="background:none; color:red; width:auto; padding:5px; font-size:12px; margin-top:5px; border:1px solid red;">🗑️ Apagar</button>` 
+                : "";
+
             lista.innerHTML += `
                 <div class="post-item">
                     <strong>${post.autor}</strong>
                     <p>${post.texto}</p>
-                    <small style="color: #888; font-size: 10px; display: block; margin-top: 8px;">Postado em: ${dataFormatada}</small>
+                    <small style="color: #888; font-size: 10px;">${dataFormatada}</small>
+                    ${botaoExcluir}
                 </div>
             `;
         });
