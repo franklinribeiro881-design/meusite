@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, doc, deleteDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBX6q4bTflyR0kva3IYgih2G3QEZWx3Smw",
@@ -32,10 +32,16 @@ window.postarMensagem = async function() {
         await addDoc(collection(db, "posts"), {
             texto: texto,
             autor: user.email,
+            curtidas: 0,
             data: new Date()
         });
         document.getElementById('post-text').value = "";
     }
+}
+
+window.curtirPost = async function(id) {
+    const postRef = doc(db, "posts", id);
+    await updateDoc(postRef, { curtidas: increment(1) });
 }
 
 window.deletarPost = async function(id) {
@@ -66,18 +72,22 @@ function carregarFeed() {
         snapshot.forEach((docSnap) => {
             const post = docSnap.data();
             const id = docSnap.id;
+            const curtidas = post.curtidas || 0;
             const dataFormatada = post.data ? new Date(post.data.seconds * 1000).toLocaleString('pt-BR') : "Agora";
             
             const botaoExcluir = auth.currentUser && auth.currentUser.email === post.autor 
-                ? `<button onclick="deletarPost('${id}')" style="background:none; color:red; width:auto; padding:5px; font-size:12px; margin-top:5px; border:1px solid red; border-radius:5px; cursor:pointer;">🗑️ Apagar</button>` 
+                ? `<button onclick="deletarPost('${id}')" style="background:none; color:red; border:1px solid red; padding:4px 8px; border-radius:5px; cursor:pointer; font-size:12px; margin-left:10px;">🗑️ Apagar</button>` 
                 : "";
 
             lista.innerHTML += `
-                <div class="post-item">
-                    <strong>${post.autor}</strong>
-                    <p>${post.texto}</p>
-                    <small style="color: #888; font-size: 10px;">${dataFormatada}</small>
-                    ${botaoExcluir}
+                <div class="post-item" style="margin-bottom:15px; padding:15px; border-radius:15px; background:#f8f9fa; border-left:5px solid #1877f2;">
+                    <strong style="display:block; color:#1877f2;">${post.autor}</strong>
+                    <p style="margin:10px 0;">${post.texto}</p>
+                    <div style="display:flex; align-items:center;">
+                        <button onclick="curtirPost('${id}')" style="background:#e7f3ff; color:#1877f2; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; font-weight:bold;">❤️ ${curtidas}</button>
+                        ${botaoExcluir}
+                    </div>
+                    <small style="color:#888; display:block; margin-top:10px; font-size:10px;">${dataFormatada}</small>
                 </div>
             `;
         });
