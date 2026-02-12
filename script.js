@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBX6q4bTflyR0kva3IYgih2G3QEZWx3Smw",
@@ -13,6 +14,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 window.fazerLogin = function() {
     const email = document.getElementById('email').value;
@@ -21,8 +23,22 @@ window.fazerLogin = function() {
 
     signInWithEmailAndPassword(auth, email, password)
       .catch(() => createUserWithEmailAndPassword(auth, email, password))
-      .then(() => console.log("Usuário logado!"))
       .catch((err) => alert("Erro: " + err.message));
+}
+
+window.postarMensagem = async function() {
+    const texto = document.getElementById('post-text').value;
+    const user = auth.currentUser;
+    if (texto && user) {
+        await addDoc(collection(db, "posts"), {
+            texto: texto,
+            autor: user.email,
+            data: new Date()
+        });
+        document.getElementById('post-text').value = "";
+    } else {
+        alert("Escreva algo antes de postar!");
+    }
 }
 
 onAuthStateChanged(auth, (user) => {
@@ -32,10 +48,28 @@ onAuthStateChanged(auth, (user) => {
         loginArea.style.display = 'none';
         userArea.style.display = 'block';
         document.getElementById('user-email').innerText = user.email;
+        carregarFeed();
     } else {
         loginArea.style.display = 'block';
         userArea.style.display = 'none';
     }
 });
+
+function carregarFeed() {
+    const q = query(collection(db, "posts"), orderBy("data", "desc"));
+    onSnapshot(q, (snapshot) => {
+        const lista = document.getElementById('mensagens-lista');
+        lista.innerHTML = "";
+        snapshot.forEach((doc) => {
+            const post = doc.data();
+            lista.innerHTML += `
+                <div style="background: #f9f9f9; padding: 10px; border-radius: 8px; margin-bottom: 10px; border-left: 5px solid #1877f2;">
+                    <strong>${post.autor}</strong>
+                    <p>${post.texto}</p>
+                </div>
+            `;
+        });
+    });
+}
 
 window.fazerLogout = () => signOut(auth);
