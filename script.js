@@ -19,7 +19,15 @@ const db = getFirestore(app);
 window.fazerLogin = function() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    if (!email || !password) { alert("Preencha e-mail e senha!"); return; }
+    const nome = document.getElementById('nome-usuario').value;
+
+    if (!email || !password || !nome) { 
+        alert("Preencha Nome, E-mail e Senha para continuar!"); 
+        return; 
+    }
+
+    localStorage.setItem('meuNome', nome);
+
     signInWithEmailAndPassword(auth, email, password)
       .catch(() => createUserWithEmailAndPassword(auth, email, password))
       .catch((err) => alert("Erro: " + err.message));
@@ -28,10 +36,13 @@ window.fazerLogin = function() {
 window.postarMensagem = async function() {
     const texto = document.getElementById('post-text').value;
     const user = auth.currentUser;
+    const nomeSalvo = localStorage.getItem('meuNome') || user.email;
+
     if (texto && user) {
         await addDoc(collection(db, "posts"), {
             texto: texto,
-            autor: user.email,
+            autorNome: nomeSalvo,
+            autorEmail: user.email,
             curtidas: 0,
             data: new Date()
         });
@@ -56,7 +67,7 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         loginArea.style.display = 'none';
         userArea.style.display = 'block';
-        document.getElementById('user-email').innerText = user.email;
+        document.getElementById('user-display-name').innerText = localStorage.getItem('meuNome') || user.email;
         carregarFeed();
     } else {
         loginArea.style.display = 'block';
@@ -75,23 +86,26 @@ function carregarFeed() {
             const curtidas = post.curtidas || 0;
             const dataFormatada = post.data ? new Date(post.data.seconds * 1000).toLocaleString('pt-BR') : "Agora";
             
-            const botaoExcluir = auth.currentUser && auth.currentUser.email === post.autor 
-                ? `<button onclick="deletarPost('${id}')" style="background:none; color:red; border:1px solid red; padding:4px 8px; border-radius:5px; cursor:pointer; font-size:12px; margin-left:10px;">🗑️ Apagar</button>` 
+            const botaoExcluir = auth.currentUser && auth.currentUser.email === post.autorEmail 
+                ? `<button onclick="deletarPost('${id}')" style="background:none; color:#ff4b4b; border:1px solid #ff4b4b; padding:4px 8px; border-radius:5px; cursor:pointer; font-size:11px; margin-left:10px;">🗑️ Apagar</button>` 
                 : "";
 
             lista.innerHTML += `
-                <div class="post-item" style="margin-bottom:15px; padding:15px; border-radius:15px; background:#f8f9fa; border-left:5px solid #1877f2;">
-                    <strong style="display:block; color:#1877f2;">${post.autor}</strong>
-                    <p style="margin:10px 0;">${post.texto}</p>
-                    <div style="display:flex; align-items:center;">
-                        <button onclick="curtirPost('${id}')" style="background:#e7f3ff; color:#1877f2; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; font-weight:bold;">❤️ ${curtidas}</button>
+                <div class="post-item" style="margin-bottom:15px; padding:15px; border-radius:15px; background:#f8f9fa; border-left:5px solid #1877f2; text-align:left;">
+                    <strong style="display:block; color:#1877f2; font-size:14px;">${post.autorNome || post.autorEmail}</strong>
+                    <p style="margin:8px 0; color:#333;">${post.texto}</p>
+                    <div style="display:flex; align-items:center; margin-top:10px;">
+                        <button onclick="curtirPost('${id}')" style="background:#e7f3ff; color:#1877f2; border:none; padding:5px 12px; border-radius:20px; cursor:pointer; font-weight:bold; font-size:12px;">❤️ ${curtidas}</button>
                         ${botaoExcluir}
                     </div>
-                    <small style="color:#888; display:block; margin-top:10px; font-size:10px;">${dataFormatada}</small>
+                    <small style="color:#aaa; display:block; margin-top:8px; font-size:9px;">${dataFormatada}</small>
                 </div>
             `;
         });
     });
 }
 
-window.fazerLogout = () => signOut(auth);
+window.fazerLogout = () => {
+    localStorage.removeItem('meuNome');
+    signOut(auth);
+};
