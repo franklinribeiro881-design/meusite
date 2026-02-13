@@ -3,31 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Rede Social</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Rede Social do Franklin</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
     <div id="app">
         <h1>Conecte-se de qualquer lugar</h1>
 
         <div id="login-area">
-            <input type="email" id="email" placeholder="Digite seu e-mail">
+            <input type="text" id="nome-usuario" placeholder="Seu Nome (Ex: Franklin Ribeiro)">
+            <input type="email" id="email" placeholder="Seu e-mail">
             <input type="password" id="password" placeholder="Sua senha">
             <button onclick="fazerLogin()">Entrar / Cadastrar</button>
         </div>
 
         <div id="user-area" style="display: none;">
-            <p>Bem-vindo, <strong id="user-email"></strong>!</p>
-            
-            <textarea id="post-text" placeholder="No que você está pensando?" rows="3" style="width: 100%; border-radius: 8px; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; font-family: sans-serif;"></textarea>
+            <p>Bem-vindo, <strong id="user-display-name"></strong>!</p>
+            <textarea id="post-text" placeholder="No que você está pensando?"></textarea>
             <button onclick="postarMensagem()">Postar no Feed</button>
-
-            <div id="feed" style="margin-top: 20px; text-align: left;">
-                <h3>Feed de Notícias</h3>
-                <div id="mensagens-lista"></div>
-            </div>
-
-            <button onclick="fazerLogout()" style="background: #ff4d4d; margin-top: 20px;">Sair</button>
+            
+            <hr>
+            <h3>Feed de Notícias</h3>
+            <div id="mensagens-lista"></div>
+            
+            <button onclick="fazerLogout()" style="background: #ff4b4b; margin-top: 20px;">Sair</button>
         </div>
     </div>
 
