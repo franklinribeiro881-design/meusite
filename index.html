@@ -3,143 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Franklin InfoPro - Assistência Técnica em Goiânia</title>
+    <title>Franklin InfoPro - Goiânia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Cores: Azul #0056b3, Branco #ffffff */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; color: #333; line-height: 1.6; }
-        header { background-color: #0056b3; color: white; padding: 20px 0; text-align: center; border-bottom: 5px solid #003d80; }
-        .container { width: 85%; margin: auto; overflow: hidden; padding: 20px; }
+        :root {
+            --azul-escuro: #004085;
+            --azul-claro: #007bff;
+            --branco: #ffffff;
+            --verde-zap: #25d366;
+        }
+
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; }
         
-        /* Relógio Digital */
+        header { 
+            background: linear-gradient(135deg, var(--azul-escuro), var(--azul-claro)); 
+            color: white; padding: 30px 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
         #relogio {
-            font-size: 1.2em;
-            background: rgba(255, 255, 255, 0.2);
+            font-family: 'Courier New', Courier, monospace;
+            background: rgba(0, 0, 0, 0.3);
             display: inline-block;
-            padding: 5px 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-weight: bold;
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            border: 1px solid gold;
+            color: gold;
         }
 
-        .hero { text-align: center; padding: 50px 20px; background: #f4f4f4; }
-        .hero h2 { color: #0056b3; font-size: 2.5em; margin-bottom: 10px; }
+        .container { width: 95%; max-width: 1000px; margin: auto; padding: 20px 10px; }
 
-        .guarantee-badge {
-            background: #28a745; color: white; padding: 15px; display: inline-block;
-            border-radius: 50px; font-weight: bold; margin-bottom: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        .guarantee {
+            background: #28a745; color: white; text-align: center;
+            padding: 15px; border-radius: 10px; font-weight: bold;
+            font-size: 1.1rem; margin-bottom: 30px; border: 2px dashed #fff;
         }
 
-        table { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 18px; text-align: left; background: white; }
-        table th { background-color: #0056b3; color: #ffffff; padding: 12px; }
-        table td { padding: 12px; border: 1px solid #ddd; }
-        table tr:nth-child(even) { background-color: #f2f2f2; }
+        /* AJUSTE DA TABELA PARA NÃO CORTAR */
+        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        th { background: var(--azul-escuro); color: white; padding: 15px; text-align: left; font-size: 0.9rem; }
+        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.85rem; }
+        .preco { font-weight: bold; color: var(--azul-escuro); white-space: nowrap; }
 
-        .testimonials { background: #0056b3; color: white; padding: 40px 0; }
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: white; color: #333; padding: 20px; border-radius: 8px; font-size: 0.9em; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        .stars { color: #ffc107; font-size: 1.2em; }
+        .testimonials { background: #e9ecef; padding: 40px 0; }
+        .testimonial-grid { display: flex; flex-direction: column; gap: 15px; }
+        .card { background: white; padding: 15px; border-left: 5px solid var(--azul-claro); border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .stars { color: #ffc107; margin-bottom: 5px; }
 
-        footer { text-align: center; padding: 30px; background: #222; color: #ccc; }
+        /* BOTÃO WHATSAPP FLUTUANTE */
+        .btn-whatsapp {
+            position: fixed; width: 60px; height: 60px; bottom: 40px; right: 20px;
+            background-color: var(--verde-zap); color: #FFF; border-radius: 50px;
+            text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 1000;
+            display: flex; align-items: center; justify-content: center; text-decoration: none;
+        }
+        .btn-whatsapp:hover { background-color: #128c7e; transform: scale(1.1); transition: 0.3s; }
+
+        footer { background: #222; color: white; text-align: center; padding: 20px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Franklin InfoPro</h1>
-    <p><strong>Fundador e Proprietário: Franklin</strong></p>
-    <div id="relogio">Brasília: 00:00:00</div>
+    <h1 style="margin:0;">Franklin InfoPro</h1>
+    <p style="margin:5px 0 0 0; opacity: 0.9;">Fundador e Proprietário: Franklin</p>
+    <div id="relogio">Brasília: --:--:--</div>
 </header>
 
-<section class="hero">
-    <div class="container">
-        <div class="guarantee-badge">✅ GARANTIA TOTAL DE 90 DIAS EM TODOS OS SERVIÇOS</div>
-        <h2>Especialista em Formatação e Limpeza Técnica</h2>
-        <p>Atendendo Goiânia e Região Metropolitana com suporte especializado.</p>
-    </div>
-</section>
-
 <div class="container">
-    <h2 style="text-align:center; color: #0056b3;">Tabela de Preços (Goiânia/GO)</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Serviço Profissional</th>
-                <th>O que está incluso</th>
-                <th>Preço Especial</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Formatação Master</strong></td>
-                <td>Windows 10/11 + Office + Backup + Drivers + Antivírus</td>
-                <td>R$ 120,00</td>
-            </tr>
-            <tr>
-                <td><strong>Limpeza de Hardware</strong></td>
-                <td>Desmontagem + Limpeza Química + Pasta Térmica Silver</td>
-                <td>R$ 90,00</td>
-            </tr>
-            <tr>
-                <td><strong>Otimização de Sistema</strong></td>
-                <td>Remoção de lixo digital e aceleração de inicialização</td>
-                <td>R$ 60,00</td>
-            </tr>
-            <tr>
-                <td><strong>Pacote Completo</strong></td>
-                <td>Formatação + Limpeza Física + Otimização de SSD</td>
-                <td>R$ 180,00</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="guarantee">
+        🛡️ GARANTIA DE 90 DIAS EM TODOS OS SERVIÇOS <br>
+        <span style="font-size: 0.8rem; font-weight: normal;">Sua confiança é nossa prioridade em Goiânia!</span>
+    </div>
+
+    <h2 style="text-align:center; color: var(--azul-escuro);">Serviços e Preços</h2>
+    
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Serviço</th>
+                    <th>O que fazemos</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Formatação Master</strong></td>
+                    <td>Win 10/11 + Office + Backup + Driver + Antivírus</td>
+                    <td class="preco">R$ 120,00</td>
+                </tr>
+                <tr>
+                    <td><strong>Limpeza Química</strong></td>
+                    <td>Desmontagem + Pasta Térmica Silver + Higienização</td>
+                    <td class="preco">R$ 90,00</td>
+                </tr>
+                <tr>
+                    <td><strong>Combo Franklin</strong></td>
+                    <td>Formatação + Limpeza + Otimização SSD (O MELHOR)</td>
+                    <td class="preco">R$ 180,00</td>
+                </tr>
+                <tr>
+                    <td><strong>Instalação Drivers</strong></td>
+                    <td>Configuração de periféricos e drivers originais</td>
+                    <td class="preco">R$ 60,00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <section class="testimonials">
     <div class="container">
-        <h2 style="text-align:center;">Depoimentos Verificados (+270 Clientes)</h2>
+        <h2 style="text-align:center;">Depoimentos (+270 avaliações)</h2>
         <div class="testimonial-grid">
             <div class="card">
                 <div class="stars">★★★★★</div>
-                <p>"Levei meu notebook no Franklin e ficou outro nível. O sistema inicia em segundos agora. Nota 10!"</p>
-                <strong>- Paulo Roberto (Setor Aeroporto)</strong>
+                <p>"O Franklin é o melhor de Goiânia! Meu notebook voltou a voar. Muito atencioso."</p>
+                <strong>- Ricardo S. (Setor Marista)</strong>
             </div>
             <div class="card">
                 <div class="stars">★★★★★</div>
-                <p>"O melhor serviço de drivers que já vi. Resolveu problemas de áudio que ninguém em Goiânia arrumava."</p>
-                <strong>- Fernanda Lima (Campinas)</strong>
+                <p>"Limpeza técnica de primeira. Meu PC não esquenta mais nada. Podem confiar!"</p>
+                <strong>- Amanda Costa (Setor Bueno)</strong>
             </div>
             <div class="card">
                 <div class="stars">★★★★★</div>
-                <p>"Super atencioso. A garantia de 90 dias me deu muita segurança, mas o trabalho é tão bom que nem precisa."</p>
-                <strong>- Lucas Mendes (Jardim Goiás)</strong>
-            </div>
-            <div class="card">
-                <div class="stars">★★★★★</div>
-                <p>"Excelente custo-benefício. Recomendei para toda a minha família aqui no Setor Marista."</p>
-                <strong>- Beatriz Souza</strong>
+                <p>"Serviço honesto e rápido. A garantia de 90 dias me deixou super tranquila."</p>
+                <strong>- Juliana M. (Campinas)</strong>
             </div>
         </div>
-        <p style="text-align:center; margin-top: 20px;"><em>Exibindo os comentários mais recentes de um total de 274 avaliações.</em></p>
+        <p style="text-align:center; font-size: 0.9rem; color: #666; margin-top: 15px;">... e mais 271 comentários positivos no nosso banco de dados!</p>
     </div>
 </section>
 
 <footer>
-    <p>&copy; 2026 Franklin InfoPro - Especialista em Informática</p>
-    <p>Goiânia - GO | Suporte via WhatsApp</p>
+    <p>&copy; 2026 Franklin InfoPro | Goiânia - GO</p>
+    <p>Atendimento Especializado em Notebooks e PCs</p>
 </footer>
 
+<a href="https://wa.me/5562981225308?text=Olá%20Franklin,%20vi%20seu%20site%20e%20gostaria%20de%20um%20orçamento!" class="btn-whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
 <script>
-    // Função para atualizar o relógio em tempo real
     function atualizarRelogio() {
         const agora = new Date();
         const opcoes = { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-        const horarioBrasilia = agora.toLocaleTimeString('pt-BR', opcoes);
-        document.getElementById('relogio').innerHTML = "Brasília: " + horarioBrasilia;
+        document.getElementById('relogio').innerHTML = "Brasília: " + agora.toLocaleTimeString('pt-BR', opcoes);
     }
-
-    // Atualiza a cada 1 segundo
     setInterval(atualizarRelogio, 1000);
-    // Chama imediatamente ao carregar
     atualizarRelogio();
 </script>
 
