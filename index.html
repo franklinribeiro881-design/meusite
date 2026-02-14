@@ -7,108 +7,149 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --azul-escuro: #004085;
-            --azul-claro: #007bff;
+            --azul-escuro: #003366;
+            --azul-claro: #0056b3;
             --branco: #ffffff;
             --verde-zap: #25d366;
+            --cinza-claro: #f4f7f6;
         }
 
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--cinza-claro); color: #333; }
         
         header { 
             background: linear-gradient(135deg, var(--azul-escuro), var(--azul-claro)); 
-            color: white; padding: 30px 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            color: white; padding: 40px 20px; text-align: center; border-bottom: 4px solid gold;
         }
 
         #relogio {
-            font-family: 'Courier New', Courier, monospace;
-            background: rgba(0, 0, 0, 0.3);
+            font-family: 'Orbitron', sans-serif;
+            background: rgba(0, 0, 0, 0.4);
             display: inline-block;
-            padding: 8px 20px;
-            border-radius: 5px;
-            font-size: 1.2rem;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
             margin-top: 15px;
             border: 1px solid gold;
             color: gold;
+            letter-spacing: 2px;
         }
 
-        .container { width: 95%; max-width: 1000px; margin: auto; padding: 20px 10px; }
+        .container { width: 90%; max-width: 1000px; margin: auto; padding: 20px 0; }
 
-        .guarantee {
-            background: #28a745; color: white; text-align: center;
-            padding: 15px; border-radius: 10px; font-weight: bold;
-            font-size: 1.1rem; margin-bottom: 30px; border: 2px dashed #fff;
+        /* SEÇÃO DE GARANTIA REFORMULADA */
+        .garantia-box {
+            background: white;
+            border: 2px solid #28a745;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+        .garantia-box h3 { color: #28a745; margin-top: 0; text-transform: uppercase; }
+        .garantia-box p { font-size: 1rem; line-height: 1.5; color: #444; }
+        .selo-garantia { font-size: 3rem; margin-bottom: 10px; display: block; }
 
-        /* AJUSTE DA TABELA PARA NÃO CORTAR */
-        .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        th { background: var(--azul-escuro); color: white; padding: 15px; text-align: left; font-size: 0.9rem; }
-        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.85rem; }
-        .preco { font-weight: bold; color: var(--azul-escuro); white-space: nowrap; }
+        /* SEÇÃO DE PAGAMENTO */
+        .pagamento-box {
+            background: var(--azul-escuro);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .metodos-pagamento {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.5rem;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .metodo-item { background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.3); }
 
-        .testimonials { background: #e9ecef; padding: 40px 0; }
-        .testimonial-grid { display: flex; flex-direction: column; gap: 15px; }
-        .card { background: white; padding: 15px; border-left: 5px solid var(--azul-claro); border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .stars { color: #ffc107; margin-bottom: 5px; }
+        /* TABELA RESPONSIVA */
+        .table-responsive { overflow-x: auto; background: white; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; min-width: 500px; }
+        th { background: var(--azul-claro); color: white; padding: 18px; text-align: left; }
+        td { padding: 15px; border-bottom: 1px solid #ddd; }
+        .preco-destaque { font-weight: bold; color: var(--azul-claro); font-size: 1.1rem; }
 
-        /* BOTÃO WHATSAPP FLUTUANTE */
+        .testimonials { background: #e9ecef; padding: 50px 0; border-radius: 20px; margin-top: 20px; }
+        .card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 6px solid gold; }
+        
         .btn-whatsapp {
-            position: fixed; width: 60px; height: 60px; bottom: 40px; right: 20px;
+            position: fixed; width: 65px; height: 65px; bottom: 30px; right: 20px;
             background-color: var(--verde-zap); color: #FFF; border-radius: 50px;
-            text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); z-index: 1000;
-            display: flex; align-items: center; justify-content: center; text-decoration: none;
+            text-align: center; font-size: 35px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none;
         }
-        .btn-whatsapp:hover { background-color: #128c7e; transform: scale(1.1); transition: 0.3s; }
 
-        footer { background: #222; color: white; text-align: center; padding: 20px; font-size: 0.8rem; }
+        footer { background: #1a1a1a; color: #888; text-align: center; padding: 30px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 style="margin:0;">Franklin InfoPro</h1>
-    <p style="margin:5px 0 0 0; opacity: 0.9;">Fundador e Proprietário: Franklin</p>
+    <h1 style="margin:0; font-size: 2.5rem;">Franklin InfoPro</h1>
+    <p style="margin:10px 0; font-weight: 300; font-size: 1.2rem;">Fundador e Proprietário: <strong>Franklin</strong></p>
     <div id="relogio">Brasília: --:--:--</div>
 </header>
 
 <div class="container">
-    <div class="guarantee">
-        🛡️ GARANTIA DE 90 DIAS EM TODOS OS SERVIÇOS <br>
-        <span style="font-size: 0.8rem; font-weight: normal;">Sua confiança é nossa prioridade em Goiânia!</span>
+    
+    <div class="garantia-box">
+        <span class="selo-garantia">🛡️</span>
+        <h3>Garantia Especial de 90 Dias</h3>
+        <p>
+            Trabalho com foco total em <strong>excelência de Software</strong>. <br>
+            Ofereço garantia de 90 dias para todos os serviços de formatação, instalação de sistemas e drivers. 
+            <br><small>*(A garantia cobre exclusivamente o serviço lógico/software; não cobre danos em peças físicas ou mau uso do hardware).*</small>
+        </p>
     </div>
 
-    <h2 style="text-align:center; color: var(--azul-escuro);">Serviços e Preços</h2>
+    <div class="pagamento-box">
+        <h3 style="margin:0;">💳 Formas de Pagamento</h3>
+        <div class="metodos-pagamento">
+            <div class="metodo-item"><i class="fas fa-pix"></i> Pix</div>
+            <div class="metodo-item"><i class="fas fa-credit-card"></i> Crédito</div>
+            <div class="metodo-item"><i class="fas fa-credit-card"></i> Débito</div>
+        </div>
+        <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">Facilitamos para você ter seu computador novo de novo!</p>
+    </div>
+
+    <h2 style="text-align:center; color: var(--azul-escuro); margin-bottom: 25px;">Tabela de Serviços Profissionais</h2>
     
     <div class="table-responsive">
         <table>
             <thead>
                 <tr>
-                    <th>Serviço</th>
-                    <th>O que fazemos</th>
+                    <th>Serviço Especializado</th>
+                    <th>Detalhes do Trabalho</th>
                     <th>Valor</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><strong>Formatação Master</strong></td>
-                    <td>Win 10/11 + Office + Backup + Driver + Antivírus</td>
-                    <td class="preco">R$ 120,00</td>
+                    <td>Sistemas (Win 10/11) + Office + Backup + Drivers + Limpeza de Vírus</td>
+                    <td class="preco-destaque">R$ 120,00</td>
                 </tr>
                 <tr>
                     <td><strong>Limpeza Química</strong></td>
-                    <td>Desmontagem + Pasta Térmica Silver + Higienização</td>
-                    <td class="preco">R$ 90,00</td>
+                    <td>Higienização Interna Completa + Pasta Térmica Silver Premium</td>
+                    <td class="preco-destaque">R$ 90,00</td>
                 </tr>
                 <tr>
-                    <td><strong>Combo Franklin</strong></td>
-                    <td>Formatação + Limpeza + Otimização SSD (O MELHOR)</td>
-                    <td class="preco">R$ 180,00</td>
+                    <td><strong>Otimização Total</strong></td>
+                    <td>Remoção de lixo digital e aceleração de inicialização de sistema</td>
+                    <td class="preco-destaque">R$ 60,00</td>
                 </tr>
                 <tr>
-                    <td><strong>Instalação Drivers</strong></td>
-                    <td>Configuração de periféricos e drivers originais</td>
-                    <td class="preco">R$ 60,00</td>
+                    <td><strong>Combo Franklin (Top)</strong></td>
+                    <td>Formatação + Limpeza Física + Otimização (O melhor de Goiânia)</td>
+                    <td class="preco-destaque">R$ 180,00</td>
                 </tr>
             </tbody>
         </table>
@@ -117,34 +158,29 @@
 
 <section class="testimonials">
     <div class="container">
-        <h2 style="text-align:center;">Depoimentos (+270 avaliações)</h2>
+        <h2 style="text-align:center; color: var(--azul-escuro);">O que dizem os Clientes de Goiânia</h2>
         <div class="testimonial-grid">
             <div class="card">
-                <div class="stars">★★★★★</div>
-                <p>"O Franklin é o melhor de Goiânia! Meu notebook voltou a voar. Muito atencioso."</p>
-                <strong>- Ricardo S. (Setor Marista)</strong>
+                <div style="color: gold; margin-bottom: 10px;">★★★★★</div>
+                <p>"O Franklin é focado no que faz. A formatação ficou impecável, todos os drivers funcionando perfeitamente. Recomendo demais!"</p>
+                <strong>- Fernando Mendes</strong>
             </div>
             <div class="card">
-                <div class="stars">★★★★★</div>
-                <p>"Limpeza técnica de primeira. Meu PC não esquenta mais nada. Podem confiar!"</p>
-                <strong>- Amanda Costa (Setor Bueno)</strong>
-            </div>
-            <div class="card">
-                <div class="stars">★★★★★</div>
-                <p>"Serviço honesto e rápido. A garantia de 90 dias me deixou super tranquila."</p>
-                <strong>- Juliana M. (Campinas)</strong>
+                <div style="color: gold; margin-bottom: 10px;">★★★★★</div>
+                <p>"Muito honesto sobre a garantia e o serviço. Meu PC estava lento, ele formatou e agora voa. Pagamento no Pix foi super fácil."</p>
+                <strong>- Cláudia Oliveira</strong>
             </div>
         </div>
-        <p style="text-align:center; font-size: 0.9rem; color: #666; margin-top: 15px;">... e mais 271 comentários positivos no nosso banco de dados!</p>
+        <p style="text-align:center; margin-top: 20px; color: #666;"><em>Junte-se a mais de 270 clientes satisfeitos!</em></p>
     </div>
 </section>
 
 <footer>
-    <p>&copy; 2026 Franklin InfoPro | Goiânia - GO</p>
-    <p>Atendimento Especializado em Notebooks e PCs</p>
+    <p>&copy; 2026 Franklin InfoPro | Assistência Técnica Especializada</p>
+    <p>Goiânia - GO | Compromisso com a Qualidade</p>
 </footer>
 
-<a href="https://wa.me/5562981225308?text=Olá%20Franklin,%20vi%20seu%20site%20e%20gostaria%20de%20um%20orçamento!" class="btn-whatsapp" target="_blank">
+<a href="https://wa.me/5562981225308?text=Olá%20Franklin,%20quero%20agendar%20um%20serviço!" class="btn-whatsapp" target="_blank">
     <i class="fab fa-whatsapp"></i>
 </a>
 
